@@ -13,5 +13,9 @@ resource "aws_db_instance" "database" {
   password             = "mypassword"
   publicly_accessible = false
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
-  vpc_security_group_ids = [var.vpc_security_group_id]
+  vpc_security_group_ids = [var.private_security_group_id]
+}
+
+output "db_instance_address" {
+  value = aws_db_instance.database.address
 }

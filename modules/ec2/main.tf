@@ -2,7 +2,7 @@ resource "aws_lb" "my_lb" {
   name               = "my-load-balancer"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [var.vpc_security_group_id]
+  security_groups    = [var.public_security_group_id]
   subnets            = [var.public_subnet_id]
 }
 
@@ -29,7 +29,7 @@ resource "aws_instance" "app_instances" {
   ami           = "ami-12345678"
   instance_type = "t2.micro"
   subnet_id     = var.public_subnet_id
-  vpc_security_group_ids = [var.vpc_security_group_id]
+  vpc_security_group_ids = [var.public_security_group_id]
 
   tags = {
     Name = "app-instance-${count.index + 1}"
